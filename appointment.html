@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/appointment.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">MediCare</a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="doctors.html">Doctors</a></li>
+            <li><a href="appointment.html" class="active">Appointment</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">&#9776;</div>
+    </nav>
+
+    <!-- Appointment Section -->
+    <section class="appointment-section">
+        <h2>Book Your Appointment</h2>
+        <p>Fill out the form below and our team will confirm your consultation.</p>
+
+        <form id="appointmentForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required placeholder="Your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="you@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" required placeholder="+91 9876543210">
+            </div>
+
+            <div class="form-group">
+                <label for="doctor">Select Doctor</label>
+                <select id="doctor" required>
+                    <option value="">-- Choose a Doctor --</option>
+                    <option value="Dr. John Doe">Dr. John Doe (Cardiologist)</option>
+                    <option value="Dr. Jane Smith">Dr. Jane Smith (Neurologist)</option>
+                    <option value="Dr. Emily Rose">Dr. Emily Rose (Pediatrician)</option>
+                    <option value="Dr. Michael Lee">Dr. Michael Lee (Orthopedic)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Select Date</label>
+                <input type="date" id="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Select Time</label>
+                <input type="time" id="time" required>
+            </div>
+
+            <button type="submit" class="btn">Book Appointment</button>
+
+            <p id="formMessage" class="form-message"></p>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 MediCare. All rights reserved.
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/appointment.js"></script>
+</body>
+</html>

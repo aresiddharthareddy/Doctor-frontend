@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Doctors</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/doctors.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">MediCare</a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="doctors.html" class="active">Doctors</a></li>
+            <li><a href="appointment.html">Appointment</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">&#9776;</div>
+    </nav>
+
+    <!-- Doctors Section -->
+    <section class="doctors-section">
+        <h2>Meet Our Doctors</h2>
+        <p>Choose from our experienced medical professionals.</p>
+
+        <!-- Filter -->
+        <div class="filter">
+            <label for="specialty">Filter by Specialty:</label>
+            <select id="specialty">
+                <option value="all">All</option>
+                <option value="cardiology">Cardiology</option>
+                <option value="neurology">Neurology</option>
+                <option value="pediatrics">Pediatrics</option>
+                <option value="orthopedic">Orthopedic</option>
+            </select>
+        </div>
+
+        <!-- Doctors Grid -->
+        <div class="doctors-grid">
+            <div class="doctor-card" data-specialty="cardiology">
+                <img src="images/doctor1.jpg" alt="Dr. John Doe">
+                <h3>Dr. John Doe</h3>
+                <p>Cardiologist</p>
+                <button class="view-profile">View Profile</button>
+            </div>
+            <div class="doctor-card" data-specialty="neurology">
+                <img src="images/doctor2.jpg" alt="Dr. Jane Smith">
+                <h3>Dr. Jane Smith</h3>
+                <p>Neurologist</p>
+                <button class="view-profile">View Profile</button>
+            </div>
+            <div class="doctor-card" data-specialty="pediatrics">
+                <img src="images/doctor3.jpg" alt="Dr. Emily Rose">
+                <h3>Dr. Emily Rose</h3>
+                <p>Pediatrician</p>
+                <button class="view-profile">View Profile</button>
+            </div>
+            <div class="doctor-card" data-specialty="orthopedic">
+                <img src="images/doctor4.jpg" alt="Dr. Michael Lee">
+                <h3>Dr. Michael Lee</h3>
+                <p>Orthopedic</p>
+                <button class="view-profile">View Profile</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="doctorModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="" alt="" id="modal-img">
+            <h3 id="modal-name"></h3>
+            <p id="modal-specialty"></p>
+            <p id="modal-description">Dr. details and experience go here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 MediCare. All rights reserved.
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/doctors.js"></script>
+</body>
+</html>
