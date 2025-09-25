@@ -1,7 +1,7 @@
 name: Preview Frontend (Temporary)
 
 on:
-  workflow_dispatch:   # Run manually from Actions tab
+  workflow_dispatch:
 
 jobs:
   preview:
@@ -10,18 +10,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build frontend (static)
-        run: |
-          npm install
-          npm run build
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build frontend
+        run: npm run build
 
       - name: Build Docker image
-        run: |
-          docker build -t doctor-frontend .
+        run: docker build -t doctor-frontend .
 
       - name: Run container
-        run: |
-          docker run -d -p 8080:80 --name web doctor-frontend
+        run: docker run -d -p 8080:80 --name web doctor-frontend
 
       - name: Install cloudflared
         run: |
@@ -33,7 +37,7 @@ jobs:
           ./cloudflared tunnel --url http://localhost:8080 --no-autoupdate > tunnel.log 2>&1 &
           sleep 10
           cat tunnel.log | grep -o 'https://[-0-9a-z]*\.trycloudflare.com' | head -n 1 > url.txt
-          echo "Preview URL: $(cat url.txt)"
-      
+          echo "🌍 Preview URL: $(cat url.txt)"
+
       - name: Keep alive for 5 minutes
         run: sleep 300
