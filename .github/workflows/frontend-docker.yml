@@ -1,37 +1,39 @@
-name: Build & Deploy Frontend Docker
+name: Preview Frontend (Temporary)
 
 on:
-  push:
-    branches: [ "main", "master" ]
-  pull_request:
-    branches: [ "main", "master" ]
+  workflow_dispatch:   # Run manually from Actions tab
 
 jobs:
-  build:
+  preview:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+      - name: Build frontend (static)
+        run: |
+          npm install
+          npm run build
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Build Docker image
+        run: |
+          docker build -t doctor-frontend .
 
-      - name: Build frontend
-        run: npm run build
+      - name: Run container
+        run: |
+          docker run -d -p 8080:80 --name web doctor-frontend
 
-      - name: Build & push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: your-dockerhub-username/doctor-frontend:latest
+      - name: Install cloudflared
+        run: |
+          curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
+          chmod +x cloudflared
 
-      - name: Logout from Dockerhub
-        run: docker logout
+      - name: Start tunnel
+        run: |
+          ./cloudflared tunnel --url http://localhost:8080 --no-autoupdate > tunnel.log 2>&1 &
+          sleep 10
+          cat tunnel.log | grep -o 'https://[-0-9a-z]*\.trycloudflare.com' | head -n 1 > url.txt
+          echo "Preview URL: $(cat url.txt)"
+      
+      - name: Keep alive for 5 minutes
+        run: sleep 300
